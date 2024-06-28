@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안양시 소개</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+        }
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 1000;
+            display: none; /* 초기에는 숨김 */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .menu-container.active {
+            display: flex; /* 클릭 시 나타남 */
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .menu a {
+            margin: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+        .menu a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        .highlight {
+            color: mediumslateblue;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>안양시 소개</h1>
+    </header>
+    <main>
+        <img id="mainImage" src="city_symbol5.jpg" alt="안양시 로고">
+    </main>
+    
+    <div class="menu-container" id="menuContainer">
+        <div class="menu">
+            <a href="#about">개요</a>
+            <a href="#history">역사</a>
+            <a href="#attractions">명소</a>
+            <a href="#symbols">상징물</a>
+        </div>
+    </div>
+    
+    <section id="about">
+        <h2>안양시 개요</h2>
+        <p>안양시는 대한민국 경기도에 위치한 도시로, 서울특별시와 인접해 있어 교통이 편리합니다. 인구는 약 60만 명이며, 자연과 도시가 조화를 이루는 살기 좋은 도시입니다.</p>
+        <div class="image-container">
+            <img src="Anyang_city.jpg" alt="안양시 전경">
+        </div>
+    </section>
+    <section id="history">
+        <h2>안양시의 역사</h2>
+        <p>안양시는 고구려 시대에 처음으로 기록되었으며, 조선 시대에는 경기도 양주군에 속해 있었습니다. 1973년 시로 승격되었으며, 현재까지 많은 발전을 이루어왔습니다.</p>
+        <div class="image-container">
+            <img src="history_map1.jpg" alt="안양시 역사">
+        </div>
+    </section>
+    <section id="attractions">
+        <h2>안양시의 명소</h2>
+        <p>안양시에는 다양한 명소가 있습니다:</p>
+        <ul>
+            <li><span class="highlight" onclick="changeImage('안양예술공원.jpg')">안양예술공원</span>: 아름다운 자연 속에서 예술 작품을 감상할 수 있는 공원입니다.</li>
+            <li><span class="highlight" onclick="changeImage('안양천.jpg')">안양천</span>: 산책과 자전거 타기에 좋은 하천으로, 도심 속 자연을 느낄 수 있습니다.</li>
+            <li><span class="highlight" onclick="changeImage('병목안시민공원.jpg')">병목안시민공원</span>: 가족과 함께 즐길 수 있는 다양한 시설이 마련된 공원입니다.</li>
+        </ul>
+        <div class="image-container">
+            <img id="attractionImage" src="안양 예술공원.jpg" alt="안양시 명소">
+        </div>
+    </section>
+    <section id="symbols">
+        <h2>안양시의 상징물</h2>
+        <p>안양시의 상징물로 선택된 새와 꽃입니다:</p>
+        <ul>
+            <li><strong>안양시의 새: 독수리</strong><br>
+                <img src="bird.jpg" alt="안양시의 새">
+            </li>
+            <li><strong>안양시의 꽃: 개나리</strong><br>
+                <img src="flower.jpg" alt="안양시의 꽃">
+            </li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 안양시. 모든 권리 보유.</p>
+    </footer>
+
+    <script>
+        // 각 메뉴 클릭 시 해당 섹션으로 스크롤 이동
+        document.querySelectorAll('.menu a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const sectionID = this.getAttribute('href').substring(1);
+                const section = document.getElementById(sectionID);
+
+                window.scrollTo({
+                    top: section.offsetTop,
+                    behavior: 'smooth'
+                });
+
+                // 메뉴 선택창 닫기
+                document.getElementById('menuContainer').classList.remove('active');
+            });
+        });
+
+        // 명소 이름 클릭 시 이미지 변경
+        function changeImage(imageName) {
+            const imageElement = document.getElementById('attractionImage');
+            imageElement.src = imageName;
+        }
+
+        // 화면 어느 곳이든 클릭 시 메뉴 선택창 열기/닫기 토글
+        window.addEventListener('click', function(e) {
+            if (!document.getElementById('menuContainer').contains(e.target)) {
+                document.getElementById('menuContainer').classList.toggle('active');
+            }
+        });
+    </script>
+</body>
+</html>
